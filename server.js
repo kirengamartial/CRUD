@@ -2,13 +2,14 @@ const express = require('express')
 const mongoose = require('mongoose')
 const Product = require('./models/productModel')
 const methodOverride = require('method-override')
+require('dotenv').config()
 
 const app = express()
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 app.set('view engine', 'ejs')
-mongoose.connect('mongodb+srv://test1234:test1234@cluster0.v9lpw.mongodb.net/work')
+mongoose.connect(process.env.DBURL)
 .then(() =>{
     console.log('db is connected')
     app.listen(3000)
